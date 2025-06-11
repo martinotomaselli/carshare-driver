@@ -5,13 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VehicleController;
 
 
+Route::get('/', [VehicleController::class, 'index'])->name('vehicles.index');
 
 Route::resource('vehicles', VehicleController::class)->middleware(['auth']);
-
-
-Route::get('/', function () {
-    return view('welcome');
-});
 
 Route::get('/dashboard', function () {
     return view('dashboard');

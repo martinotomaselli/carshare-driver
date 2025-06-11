@@ -1,50 +1,49 @@
-{{-- Estende il layout principale (layouts/app.blade.php) --}}
 @extends('layouts.app')
 
-{{-- Sezione del contenuto principale della pagina --}}
 @section('content')
-<div class="container">
-    
-    {{-- Titolo della pagina --}}
+<div class="container mt-4">
     <h1 class="mb-4">Tutti i veicoli</h1>
 
-    {{-- Pulsante per andare al form di creazione veicolo --}}
-    <a href="{{ route('vehicles.create') }}" class="btn btn-success mb-3">Aggiungi Veicolo</a>
+    <a href="{{ route('vehicles.create') }}" class="btn btn-success mb-3">+ Aggiungi Veicolo</a>
 
-    {{-- Tabella con l'elenco dei veicoli --}}
-    <table class="table table-striped">
-        <thead>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
+
+    <table class="table table-striped table-bordered align-middle">
+        <thead class="table-dark">
             <tr>
-                <th>Marca</th>         {{-- Colonna: marca del veicolo (es. Fiat) --}}
-                <th>Modello</th>       {{-- Colonna: modello (es. Panda) --}}
-                <th>Tipo</th>          {{-- Colonna: tipo (auto, bici, scooter) --}}
-                <th>Posti</th>         {{-- Colonna: numero di posti --}}
-                <th>Prezzo/h</th>      {{-- Colonna: prezzo per ora --}}
-                <th>Azioni</th>        {{-- Colonna: pulsanti modifica/elimina --}}
+                <th>Marca</th>
+                <th>Modello</th>
+                <th>Tipo</th>
+                <th>Posti</th>
+                <th>Prezzo/h</th>
+                <th>Azioni</th>
             </tr>
         </thead>
         <tbody>
-            {{-- Ciclo su tutti i veicoli passati dal controller --}}
-            @foreach($vehicles as $vehicle)
-            <tr>
-                <td>{{ $vehicle->brand }}</td>       {{-- Stampa marca --}}
-                <td>{{ $vehicle->model }}</td>       {{-- Stampa modello --}}
-                <td>{{ $vehicle->type }}</td>        {{-- Stampa tipo --}}
-                <td>{{ $vehicle->seats }}</td>       {{-- Stampa numero posti --}}
-                <td>€ {{ number_format($vehicle->price_per_hour, 2, ',', '.') }}</td> {{-- Prezzo orario formattato in euro --}}
-                <td>
-                    {{-- Link per modificare il veicolo --}}
-                    <a href="{{ route('vehicles.edit', $vehicle) }}" class="btn btn-warning btn-sm">Modifica</a>
+            @forelse ($vehicles as $vehicle)
+                <tr>
+                    <td>{{ $vehicle->brand }}</td>
+                    <td>{{ $vehicle->model }}</td>
+                    <td>{{ $vehicle->type }}</td>
+                    <td>{{ $vehicle->seats }}</td>
+                    <td>€ {{ number_format($vehicle->price_per_hour, 2) }}</td>
+                    <td>
+                        <a href="{{ route('vehicles.edit', $vehicle) }}" class="btn btn-warning btn-sm">Modifica</a>
 
-                    {{-- Form per eliminare il veicolo (metodo DELETE) --}}
-                    <form action="{{ route('vehicles.destroy', $vehicle) }}" method="POST" class="d-inline">
-                        @csrf   {{-- Token di protezione Laravel --}}
-                        @method('DELETE')  {{-- Metodo HTTP DELETE --}}
-                        <button class="btn btn-danger btn-sm">Elimina</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
+                        <form action="{{ route('vehicles.destroy', $vehicle) }}" method="POST" class="d-inline">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger btn-sm" onclick="return confirm('Sei sicuro di voler eliminare questo veicolo?')">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            @empty
+                <tr>
+                    <td colspan="6" class="text-center text-muted">Nessun veicolo disponibile</td>
+                </tr>
+            @endforelse
         </tbody>
     </table>
 </div>
