@@ -1,64 +1,34 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom shadow-sm">
-    <div class="container">
-        <a class="navbar-brand fw-bold" href="{{ route('dashboard') }}">
-            🚗 Take&Drive
-        </a>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">CarShare</a>
 
-        <!-- Toggler per mobile -->
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+    <div class="d-flex">
+      @auth
+    <li class="nav-item">
+        <a class="nav-link" href="#">Ciao, {{ Auth::user()->name }}</a>
+    </li>
 
-        <!-- Contenuto Navbar -->
-        <div class="collapse navbar-collapse" id="navbarContent">
-            <ul class="navbar-nav ms-auto">
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
-                            Dashboard
-                        </a>
-                    </li>
+    @if(Auth::user()->is_admin)
+        <li class="nav-item">
+            <span class="badge bg-success">Revisore</span>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('admin.vehicles.create') }}">Aggiungi Veicolo</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{{ route('panel') }}">Pannello Revisione</a>
+        </li>
+    @endif
 
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('vehicles.index') ? 'active' : '' }}" href="{{ route('vehicles.index') }}">
-                            Veicoli
-                        </a>
-                    </li>
+    <li class="nav-item">
+        <form method="POST" action="{{ route('logout') }}">
+            @csrf
+            <button class="nav-link btn btn-link" type="submit">Logout</button>
+        </form>
+    </li>
+@endauth
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
-                            {{ Auth::user()->name }}
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
-                            <li>
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                    Profilo
-                                </a>
-                            </li>
-                            <li>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                    <button type="submit" class="dropdown-item">
-                                        Logout
-                                    </button>
-                                </form>
-                            </li>
-                        </ul>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('login') ? 'active' : '' }}" href="{{ route('login') }}">
-                            Login
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link {{ request()->routeIs('register') ? 'active' : '' }}" href="{{ route('register') }}">
-                            Registrati
-                        </a>
-                    </li>
-                @endauth
-            </ul>
-        </div>
+        
     </div>
+  </div>
 </nav>

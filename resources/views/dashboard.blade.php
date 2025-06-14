@@ -1,9 +1,26 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-12">
-        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6 text-gray-900">
-            {{ __("Hai effettuato l'accesso!") }}
-        </div>
+<div class="container mt-4">
+  <h1>Dashboard</h1>
+
+  @if(session('success'))
+    <div class="alert alert-success">{{ session('success') }}</div>
+  @endif
+  @if(session('error'))
+    <div class="alert alert-danger">{{ session('error') }}</div>
+  @endif
+
+  @if(auth()->user()->is_admin)
+    <div class="alert alert-info">
+      Sei un revisore. Puoi aggiungere, modificare e rimuovere veicoli.
     </div>
+  @else
+    <div class="alert alert-secondary">
+      Sei un utente. Puoi prenotare veicoli.
+    </div>
+  @endif
+
+  <!-- Altri contenuti personalizzati -->
+</div>
 @endsection

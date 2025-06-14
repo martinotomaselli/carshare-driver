@@ -18,7 +18,7 @@
     @endif
 
     {{-- Form per creare un nuovo veicolo --}}
-    <form action="{{ route('vehicles.store') }}" method="POST">
+    <form action="{{ route('admin.vehicles.store') }}" method="POST">
         @csrf 
 
         {{-- Marca --}}
