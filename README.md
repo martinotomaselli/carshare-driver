@@ -1,52 +1,62 @@
-# 🚗 Car Share Driver
+# 🚗 CarShare Driver - Mini Piattaforma di Car Sharing
 
-Mini piattaforma di **car sharing** sviluppata in **Laravel 10**, progettata per la gestione dei veicoli e l’autenticazione degli utenti.  
-Realizzata per un secondo colloquio tecnico.
-
----
-
-##  Funzionalità attuali
-
-- Registrazione e login utente (Laravel Breeze)
-- Accesso sicuro con autenticazione
-- Dashboard utente protetta
-- CRUD completo dei veicoli:
-  - Aggiunta veicolo
-  - Modifica veicolo
-  - Eliminazione veicolo
-  - Visualizzazione lista veicoli
+Mini-app full stack per simulare una piattaforma di car sharing, con funzionalità essenziali e design intuitivo. Consente a utenti (driver) di registrarsi, cercare veicoli disponibili, effettuare prenotazioni e pagamenti, con l'integrazione di un **chatbot AI** intelligente come assistente virtuale.
 
 ---
 
-##  Stack Tecnologico
+##  Funzionalità Implementate
 
-- **Laravel 10** (con Blade)
-- **PHP 8+**
-- **MySQL** (gestito via DBeaver)
-- **Tailwind CSS** (preset Breeze)
-- **Bootstrap** (per elementi UI rapidi)
-- **VS Code** + Git + GitHub
+### 1. Autenticazione e Gestione Utenti
+
+- Registrazione e login sicuri (Laravel Auth)
+- Dashboard personale con cronologia prenotazioni
+
+###  Ricerca Veicoli
+
+- Elenco veicoli disponibili con marca, modello, prezzo
+- Pulsante "Prenota" attivo per ogni veicolo
+
+###  Prenotazioni
+
+- Simulazione di prenotazione per ogni utente
+- Storico prenotazioni nella dashboard personale
+
+###  Pagamenti (Opzionale)
+
+- Integrazione con Stripe (test mode, gratuito)
+- Checkout con carta di test
+- Conferma di pagamento e pagina di successo
+
+###  Chatbot AI (Extra)
+
+- Microservizio FastAPI con modello **Ollama**
+- Il bot conosce le reali funzionalità della piattaforma
+- Guida l’utente su prenotazioni, login, dashboard ecc.
+- Risposte amichevoli e personalizzate
 
 ---
 
-##  Struttura del progetto
+##  Tecnologie Utilizzate
 
-- `routes/web.php` – Tutte le rotte web protette e pubbliche
-- `app/Http/Controllers/VehicleController.php` – Gestione veicoli
-- `resources/views/vehicles/` – Vista `index`, `create`, `edit`
-- `database/migrations/` – Tabella `vehicles`
-- `.env` – Configurazione DB
+- **Laravel 10**
+- **MySQL (TablePlus)**
+- **Bootstrap 5**
+- **FastAPI + Python 3.11**
+- **Ollama (LLM locale)**
+- **Stripe (checkout sandbox)**
+- **JavaScript fetch/AJAX**
 
 ---
 
-##  Come eseguire il progetto
+##  Istruzioni per l'installazione
+
+### Backend (Laravel)
 
 ```bash
-git clone https://github.com/martinotomaselli/carshare-driver.git
+git clone https://github.com/tuo-utente/carshare-driver.git
 cd carshare-driver
 composer install
 cp .env.example .env
 php artisan key:generate
-# Imposta DB in .env
-php artisan migrate
+php artisan migrate --seed
 php artisan serve

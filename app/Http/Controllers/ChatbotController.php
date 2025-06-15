@@ -3,21 +3,28 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
 
 class ChatbotController extends Controller
 {
     public function __invoke(Request $request)
     {
-        // logica del bot (mock)
-        $question = strtolower($request->input('message'));
+        $question = $request->input('message');
 
-        $answer = 'Mi dispiace, non ho capito.';
-        if (str_contains($question, 'prenotazione')) {
-            $answer = 'Per prenotare vai su “Cerca veicoli”, scegli l’auto e fai clic su Prenota.';
-        } elseif (str_contains($question, 'orari')) {
-            $answer = 'Il servizio è attivo 24/7.';
+        // chiamata al servizio FastAPI
+        $response = Http::timeout(15)
+            ->post(config('services.fastapi.url').'/chat', [
+                'question' => $question,
+            ]);
+
+        if ($response->failed()) {
+            return response()->json([
+                'reply' => 'Il servizio non è al momento disponibile.'
+            ], 502);
         }
 
-        return response()->json(['reply' => $answer]);
+        return response()->json([
+            'reply' => $response->json('reply'),
+        ]);
     }
 }

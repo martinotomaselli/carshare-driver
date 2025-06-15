@@ -10,7 +10,8 @@ Route::get('/', fn () => view('welcome'))->name('home');
 Route::get('/vehicles', [VehicleController::class,'index'])->name('vehicles.index');
 
 /* ---------- CHATBOT ---------- */
-Route::post('/chatbot/message',[ChatbotController::class, '__invoke']) ->name('chatbot.message'); 
+Route::view('/chat', 'welcome');
+Route::post('/chat', ChatbotController::class)->name('chatbot.message');
             
      
 

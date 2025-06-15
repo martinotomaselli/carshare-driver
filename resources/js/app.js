@@ -1,4 +1,6 @@
 import './bootstrap';
+import './chatbot.js';
+
 
 import Alpine from 'alpinejs';
 
