@@ -20,6 +20,12 @@ Mini-app full stack per simulare una piattaforma di car sharing, con funzionalit
 
 - Simulazione di prenotazione per ogni utente
 - Storico prenotazioni nella dashboard personale
+  
+### Revisore (Moderazione)
+
+Gli utenti possono richiedere di diventare revisori dalla propria dashboard.
+L’amministratore può approvare o rifiutare le richieste.
+I revisori approvati hanno accesso a un pannello di amministrazione con strumenti aggiuntivi (es. gestione veicoli).
 
 ###  Pagamenti (Opzionale)
 
