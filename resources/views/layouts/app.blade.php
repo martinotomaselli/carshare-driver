@@ -27,6 +27,11 @@
                     <!-- <a class="nav-link" href="/">Cerca veicoli</a> -->
                     <a class="nav-link" href="{{ route('vehicles.index') }}">Cerca veicoli</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.dashboard') }}">
+                     Le tue prenotazioni
+                    </a>
+                </li>
 
                 @if(!Auth::user()->is_admin)
                     <li class="nav-item">
@@ -46,10 +51,11 @@
                      @endif
                 @endauth
                
-
+                @if(Auth::user()->is_admin)
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('admin.panel') }}">Pannello</a>
                     </li>
+                @endif
                 
                 
                

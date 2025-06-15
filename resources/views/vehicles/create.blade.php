@@ -47,7 +47,7 @@
 
         {{-- Prezzo orario --}}
         <div class="mb-3">
-            <label for="price_per_hour" class="form-label">Prezzo orario (€)</label>
+            <label for="price" class="form-label">Prezzo orario (€)</label>
             <input type="number" name="price_per_hour" step="0.01" class="form-control" required>
         </div>
 

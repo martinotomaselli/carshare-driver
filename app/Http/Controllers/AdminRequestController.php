@@ -38,7 +38,7 @@ class AdminRequestController extends Controller
         );
 
         return redirect()
-            ->route('dashboard')
+            ->route('user.dashboard')
             ->with('success', 'Richiesta inviata con successo! Attendi approvazione.');
     }
 

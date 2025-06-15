@@ -8,7 +8,7 @@
         <form action="{{ route('reviewer.send') }}" method="POST">
             @csrf
             <button type="submit" class="btn btn-primary">Invia Richiesta</button>
-            <a href="{{ route('dashboard') }}" class="btn btn-secondary">Annulla</a>
+            <a href="{{ route('user.dashboard') }}" class="btn btn-secondary">Annulla</a>
         </form>
     </div>
 @endsection

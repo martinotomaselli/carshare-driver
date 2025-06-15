@@ -17,6 +17,12 @@ class Booking extends Model
         'start_time',
         'end_time',
     ];
+     protected $casts = [
+        'date'       => 'date',
+        'start_time' => 'datetime:H:i',
+        'end_time'   => 'datetime:H:i',
+        'is_paid'    => 'boolean',
+    ];
 
     public function user()
     {
