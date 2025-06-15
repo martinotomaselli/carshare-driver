@@ -2,11 +2,17 @@
 
 use App\Http\Controllers\{
     VehicleController, BookingController, ProfileController,
-    AdminRequestController, DashboardController, UserDashboardController
+    AdminRequestController, DashboardController, UserDashboardController,ChatbotController,
+    
 };
 
 Route::get('/', fn () => view('welcome'))->name('home');
 Route::get('/vehicles', [VehicleController::class,'index'])->name('vehicles.index');
+
+/* ---------- CHATBOT ---------- */
+Route::post('/chatbot/message',[ChatbotController::class, '__invoke']) ->name('chatbot.message'); 
+            
+     
 
 /* ---------- AREA UTENTE LOGGATO ---------- */
 Route::middleware('auth')->group(function () {
