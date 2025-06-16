@@ -28,10 +28,7 @@
                         @if($b->is_paid)
                             <span class="badge bg-success">Pagato</span>
                         @else
-                            <form action="{{ route('bookings.pay', $b) }}" method="POST" class="d-inline">
-                                @csrf @method('PATCH')
-                                <button class="btn btn-sm btn-success">Paga</button>
-                            </form>
+                          <a href="{{ route('payment.checkout', $b->vehicle->id) }}" class="btn btn-sm btn-success mb-1">Paga con Stripe</a>
                         @endif
 
                         <a href="{{ route('bookings.edit', $b) }}" class="btn btn-sm btn-primary ms-1">

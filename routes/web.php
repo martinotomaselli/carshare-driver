@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\{
     VehicleController, BookingController, ProfileController,
-    AdminRequestController, DashboardController, UserDashboardController,ChatbotController,
+    AdminRequestController, DashboardController, UserDashboardController,ChatbotController,PaymentController,
     
 };
 
@@ -63,3 +63,14 @@ Route::middleware('signed')->name('admin.')->group(function () {
 
 /* Auth scaffolding Breeze */
 require __DIR__.'/auth.php';
+
+/* ----------  PAGAMENTO STRIPE  ---------- */
+
+Route::get('/checkout/{vehicle}', [PaymentController::class, 'checkout'])->name('payment.checkout');
+
+
+Route::get('/success', [PaymentController::class, 'success'])
+      ->name('payment.success');
+
+Route::get('/cancel',  [PaymentController::class, 'cancel'])
+      ->name('payment.cancel');

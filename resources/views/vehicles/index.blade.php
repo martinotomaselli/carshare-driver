@@ -28,8 +28,9 @@
 
                         {{-- pulsanti in fondo alla card --}}
                         <div class="mt-auto">
-                            <a href="{{ route('vehicles.book', $car) }}"
-                               class="btn btn-primary mb-1">Prenota</a>
+                            <a href="{{ route('vehicles.book', $car) }}"class="btn btn-primary mb-1">Prenota</a>
+                           
+                            {{-- link alla pagina del veicolo --}}
 
                             @auth
                                 @if(Auth::user()->is_admin)
